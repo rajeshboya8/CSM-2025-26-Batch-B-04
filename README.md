@@ -1,5 +1,6 @@
-🎓 Blockchain-Based Decentralized Certificate Issuance and Verification System
-📌 Overview
+#🎓 Blockchain-Based Decentralized Certificate Issuance and Verification System
+
+#📌 Overview
 
 This project is a decentralized application (DApp) that allows educational institutes to issue, revoke, and manage certificates using Ethereum smart contracts. Employers and the public can verify the authenticity of certificates directly on the blockchain, ensuring they are secure, tamper-proof, and transparent.
 
