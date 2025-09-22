@@ -1,104 +1,133 @@
-# CSM-2025-26-Batch-B-04
-#!/bin/bash
-# 🌿 Setup Script for Ayurveda Intelligence for Healing (AI4H)
+🎓 Blockchain-Based Decentralized Certificate Issuance and Verification System
+📌 Overview
 
-# Create project structure
-mkdir AI4H && cd AI4H
-mkdir data models static templates
+This project is a decentralized application (DApp) that allows educational institutes to issue, revoke, and manage certificates using Ethereum smart contracts. Employers and the public can verify the authenticity of certificates directly on the blockchain, ensuring they are secure, tamper-proof, and transparent.
 
-# Create requirements.txt
-cat <<EOL > requirements.txt
-flask
-scikit-learn
-pandas
-numpy
-nltk
-spacy
-requests
-EOL
+🚀 Features
 
-# Create app.py (Flask entry point)
-cat <<'EOL' > app.py
-from flask import Flask, render_template, request
-import pickle
-import nltk
+Register authorized institutes on the blockchain
 
-app = Flask(__name__)
+Issue certificates to students via smart contracts
 
-# Load trained ML models (placeholders for now)
-try:
-    disease_model = pickle.load(open("models/disease_model.pkl", "rb"))
-    medicine_model = pickle.load(open("models/medicine_model.pkl", "rb"))
-except:
-    disease_model = None
-    medicine_model = None
+Revoke or cancel invalid certificates
 
-@app.route('/')
-def index():
-    return render_template("index.html")
+Verify certificates online using certificate ID
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    symptoms = request.form['symptoms']
-    # Placeholder logic (replace with real ML prediction)
-    disease = "Fever"
-    medicine = "Tulsi Tea"
-    remedy = "Boil Tulsi leaves in water, add honey, drink twice daily."
-    return render_template("result.html", symptoms=symptoms, disease=disease, medicine=medicine, remedy=remedy)
+Tamper-proof, transparent, and accessible verification system
 
-if __name__ == "__main__":
-    app.run(debug=True)
-EOL
+🛠 Tech Stack
 
-# Create chatbot.py
-cat <<'EOL' > chatbot.py
-# Simple NLP-based chatbot placeholder
-def chatbot_response(user_input):
-    responses = {
-        "fever": "Drink Tulsi tea and consult nearby doctor if high temperature.",
-        "cough": "Use turmeric milk, and avoid cold drinks.",
-        "headache": "Practice yoga and try herbal tea."
-    }
-    for key in responses:
-        if key in user_input.lower():
-            return responses[key]
-    return "I'm still learning! Please consult a doctor if serious."
-EOL
+Frontend: React.js
 
-# Create index.html
-cat <<'EOL' > templates/index.html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>AI4H - Ayurveda Intelligence for Healing</title>
-</head>
-<body>
-  <h1>🌿 Ayurveda Intelligence for Healing</h1>
-  <form action="/predict" method="post">
-    <label>Enter your symptoms:</label><br>
-    <input type="text" name="symptoms" placeholder="e.g., fever, body pain">
-    <button type="submit">Get Remedy</button>
-  </form>
-</body>
-</html>
-EOL
+Blockchain: Ethereum (Smart Contracts in Solidity)
 
-# Create result.html
-cat <<'EOL' > templates/result.html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>AI4H Result</title>
-</head>
-<body>
-  <h2>Prediction Result</h2>
-  <p><b>Symptoms:</b> {{ symptoms }}</p>
-  <p><b>Predicted Disease:</b> {{ disease }}</p>
-  <p><b>Recommended Ayurvedic Medicine:</b> {{ medicine }}</p>
-  <p><b>Remedy Preparation:</b> {{ remedy }}</p>
-  <a href="/">Go Back</a>
-</body>
-</html>
-EOL
+Frameworks: Truffle, Ganache
 
-echo "✅ AI4H project structure created successfully!"
+Wallet Integration: MetaMask
+
+Deployment: Infura (for testnets like Sepolia/Rinkeby)
+
+Security Testing: Mythril
+
+📂 Project Structure
+Certoshi
+│── assets              # Images, logos, screenshots  
+│── client              # React.js frontend code  
+│── contracts           # Solidity smart contracts  
+│── migrations          # Deployment scripts  
+│── scripts             # Helper scripts  
+│── test                # Smart contract test cases  
+│── truffle-config.js   # Truffle configuration  
+│── README.md           # Documentation  
+
+⚙️ Installation & Setup
+1. Clone Repository
+git clone https://github.com/your-username/Certoshi.git
+cd Certoshi
+
+2. Install Dependencies
+npm install
+
+3. Setup Local Blockchain (Ganache)
+
+Option 1: Ganache GUI → Create new workspace, select truffle-config.js.
+
+Option 2: Ganache CLI
+
+npm install -g ganache-cli
+ganache-cli
+
+4. Environment Variables
+
+Create a .env file in root directory:
+
+LOCAL_ENDPOINT=http://127.0.0.1:8545
+NETWORK_ID=1337
+
+5. Compile & Deploy Smart Contracts
+truffle compile
+npm run deploy:local
+
+6. Setup Client Application
+cd client
+npm install
+
+
+Create .env inside client/ folder:
+
+REACT_APP_LOCAL_ENDPOINT=http://127.0.0.1:8545
+REACT_APP_NETWORK_ID=1337
+
+
+Run frontend:
+
+npm start
+
+
+Visit → http://localhost:3000/
+ 🎉
+
+🔑 MetaMask Setup
+
+Add Localhost 8545 network in MetaMask
+
+RPC URL: http://127.0.0.1:8545
+
+Chain ID: 1337
+
+Import accounts from Ganache using private keys.
+
+🧪 Testing
+
+Run smart contract tests:
+
+truffle test
+
+
+Run security analysis with Mythril (requires Docker):
+
+docker pull mythril/myth
+docker run -v $(pwd):/contracts mythril/myth analyze /contracts/Certification.sol
+
+📌 Use Cases
+
+Institutes → Register and issue certificates
+
+Institutes → Revoke invalid certificates
+
+Employers/Public → Verify certificates online by ID
+
+Students → Get secure, trusted certificates
+
+
+👥 Team Members
+
+[Rajesh B]
+
+[Prabhas P]
+
+[Suleman G]
+
+[Vishnu Vardhan B]
+
+This project is licensed under the MIT License – feel free to use and modify.
